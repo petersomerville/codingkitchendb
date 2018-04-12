@@ -4,36 +4,36 @@ from pprint import pprint
 ckds = CKDS()
 
 try:
-    for i in range(1,50):
-        results = ckds.get_json("http://data.coding.kitchen/api/people/{}".format(i))
+    for person_id in range(1,50):
+        results = ckds.get_json("http://data.coding.kitchen/api/people/{}".format(person_id))
         for p in results:
             person = Person()
             person.parse_person(p)
-            thing = ckds.db.open().query(Person).filter(Person.api == person.api).all()
+            thing = ckds.db.open().query(Person).filter(Person.url == person.url).all()
             if len(thing) == 0:
                 ckds.db.save(person)
 except:
     print('No more pages of people.')
 
 try:
-    for i in range(1,10):
-        results = ckds.get_json("http://data.coding.kitchen/api/companies/{}".format(i))
+    for company_id in range(1,10):
+        results = ckds.get_json("http://data.coding.kitchen/api/companies/{}".format(company_id))
         for c in results:
             company = Company()
             company.parse_company(c)
-            thing = ckds.db.open().query(Company).filter(Company.api == company.api).all()
+            thing = ckds.db.open().query(Company).filter(Company.url == company.url).all()
             if len(thing) == 0:
                 ckds.db.save(company)
 except:
     print('No more pages of companies.')
 
 try:
-    for i in range(1,10):
-        results = ckds.get_json("http://data.coding.kitchen/api/departments/{}".format(i))
+    for department_id in range(1,10):
+        results = ckds.get_json("http://data.coding.kitchen/api/departments/{}".format(department_id))
         for d in results:
             department = Department()
             department.parse_department(d)
-            thing = ckds.db.open().query(Department).filter(Department.api == department.api).all()
+            thing = ckds.db.open().query(Department).filter(Department.url == department.url).all()
             if len(thing) == 0:
                 ckds.db.save(department)
 except:
@@ -48,12 +48,12 @@ for s in results:
         ckds.db.save(state)    
 
 try:
-    for i in range(1,50):
-        results = ckds.get_json("http://data.coding.kitchen/api/cities/{}".format(i))
+    for city_id in range(1,50):
+        results = ckds.get_json("http://data.coding.kitchen/api/cities/{}".format(city_id))
         for c in results:
             city = City()
             city.parse_city(c)
-            thing = ckds.db.open().query(City).filter(City.api == city.api).all()
+            thing = ckds.db.open().query(City).filter(City.url == city.url).all()
             if len(thing) == 0:
                 ckds.db.save(city)
 except: 
@@ -63,17 +63,17 @@ results = ckds.get_json("http://data.coding.kitchen/api/leagues/")
 for l in results:
     league = League()
     league.parse_league(l)
-    thing = ckds.db.open().query(League).filter(League.api == league.api).all()
+    thing = ckds.db.open().query(League).filter(League.url == league.url).all()
     if len(thing) == 0:
         ckds.db.save(league)
 
 try:
-    for i in range(1,10):
-        results = ckds.get_json("http://data.coding.kitchen/api/clubs/{}".format(i))
+    for club_id in range(1,10):
+        results = ckds.get_json("http://data.coding.kitchen/api/clubs/{}".format(club_id))
         for c in results:
             club = Club()
             club.parse_club(c)
-            thing = ckds.db.open().query(Club).filter(Club.api == club.api).all()
+            thing = ckds.db.open().query(Club).filter(Club.url == club.url).all()
             if len(thing) == 0:
                 ckds.db.save(club)    
 except:
@@ -83,6 +83,6 @@ results = ckds.get_json("http://data.coding.kitchen/api/exchanges/")
 for e in results:
     exchange = Exchange()
     exchange.parse_exchange(e)
-    thing = ckds.db.open().query(Exchange).filter(Exchange.api == exchange.api).all()
+    thing = ckds.db.open().query(Exchange).filter(Exchange.url == exchange.url).all()
     if len(thing) == 0:
         ckds.db.save(exchange)  
