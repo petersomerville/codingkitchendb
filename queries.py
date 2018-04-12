@@ -5,14 +5,20 @@ ckds = CKDS()
 
 # City for each exchange
 
-exchanges_list = ckds.db.open().query(Exchange).all()
-for exchange in exchanges_list:
-    exchange_cities = exchange.city
-    results = ckds.get_json("http://data.coding.kitchen/api/city/{}".format(exchange_cities))
-    print(results)
-    print(results.name)
+# exchanges_list = ckds.db.open().query(Exchange).all()
+# for exchange in exchanges_list:
+#     exchange_cities = exchange.city
+#     results = ckds.get_json("http://data.coding.kitchen/api/city/{}".format(exchange_cities))
+#     print(results)
+#     print(results.name)
 
-
+results = ckds.get_json("http://data.coding.kitchen/api/exchanges/")
+for ex in results:
+    exchange = Exchange()
+    exchange.parse_exchange(ex)
+    thing = ckds.db.open().query(Exchange).filter(Exchange.url == exchange.url).all()
+    if len(thing) == 0:
+        print(thing.url)
 
 
 # high_rev_cos = ckds.db.open().query(Company).filter(Company.revenue > 1000).all()
