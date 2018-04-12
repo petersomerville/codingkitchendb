@@ -53,8 +53,8 @@ class Department(Base):
 
 class State(Base):
     __tablename__ = 'states'
-    url = Column(Integer, primary_key=True)
-    api = Column(String, unique=True)
+    id = Column(Integer, primary_key=True)
+    url = Column(String, unique=True)
     name = Column(String)
     abbreviation = Column(String)
     gdp = Column(Integer)
